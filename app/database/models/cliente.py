@@ -4,8 +4,11 @@ import datetime
 
 class Cliente(Model):
     nome = CharField()
-    email = CharField()
-    data_registro = DateTimeField(default=datetime.datetime.now)
+    cpf = CharField()
+    celular1 = CharField()
+    celular2 = CharField()
+    data_de_nascimento = CharField()
+    data_atualizacao = CharField()
 
     class Meta:
         database = db

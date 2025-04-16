@@ -1,7 +1,11 @@
 <tr id="cliente-{{cliente.id}}">
     <th scope="row">{{ cliente.id }}</th>
     <td>{{ cliente.nome }}</td>
-    <td>{{ cliente.email }}</td>
+    <td>{{ cliente.cpf }}</td>
+    <td>{{ cliente.celular1 }}</td>
+    <td>{{ cliente.celular2 }}</td>
+    <td>{{ cliente.data_de_nascimento }}</td>
+    <td>{{ cliente.data_atualizacao }}</td>
     <td>
         <button class="btn btn-secondary" 
             c-get="{{ url_for('cliente.detalhe_cliente', cliente_id=cliente.id) }}"

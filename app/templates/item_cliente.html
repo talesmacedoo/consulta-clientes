@@ -19,11 +19,32 @@
             c-target="#form-cliente">
                 Editar
         </button>
-
-        <button class="btn btn-danger" 
-            c-delete="{{ url_for('cliente.deletar_cliente', cliente_id=cliente.id) }}"
-            c-remove-closest="tr">
-                Deletar
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarExclusao">
+            Excluir
         </button>
+        <!-- Modal Excluir Cliente -->
+        <div class="modal fade" id="confirmarExclusao" tabindex="-1" aria-labelledby="confirmarExclusaoLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="confirmarExclusaoLabel">Confirmar Exclusão</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Tem certeza de que deseja <strong>excluir permanentemente</strong> este cliente?  
+                        Essa ação não poderá ser desfeita.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button class="btn btn-danger" data-bs-dismiss="modal"
+                            c-delete="{{ url_for('cliente.deletar_cliente', cliente_id=cliente.id) }}"
+                            c-remove-closest="tr">
+                                Deletar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </td>
 </tr>
+  

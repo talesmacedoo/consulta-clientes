@@ -2,18 +2,24 @@
 
 
 	{% block conteudo %}
-      <div class="cover-container">
-        <h1>Consultar cliente</h1>
+    <div class="cover-container">
+      <h1>Consultar cliente</h1>
+      <form id="form-busca" method="GET" action="/buscar">
         <div class="input-group mb-3">
-          <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Tipo de Busca</button>
+          <button id="btn-tipo-busca" class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            CPF
+          </button>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Telefone</a></li>
-            <li><a class="dropdown-item" href="#">CPF</a></li>
+            <li><a class="dropdown-item tipo-busca" data-tipo="cpf" href="#">CPF</a></li>
+            <li><a class="dropdown-item tipo-busca" data-tipo="telefone" href="#">Telefone</a></li>
           </ul>
-          <input type="text" class="form-control" aria-label="Text input with dropdown button">
+          <input type="text" name="valor" id="input-busca" class="form-control" placeholder="Digite o CPF" required>
+          <input type="hidden" name="tipo" id="tipo-escolhido" value="cpf">
         </div>
         <p class="lead">
-          <a href="#" class="btn btn-lg btn-light fw-bold border-white bg-white">Consultar</a>
+          <button type="submit" class="btn btn-lg btn-light fw-bold border-white bg-white">Consultar</button>
         </p>
-      </div>
+      </form>
+    </div>
+  
 	{% endblock %}

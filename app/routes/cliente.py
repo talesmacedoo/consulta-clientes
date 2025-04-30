@@ -43,6 +43,28 @@ def detalhe_cliente(cliente_id):
     cliente = Cliente.get_by_id(cliente_id)
     return render_template('detalhe_cliente.html', cliente=cliente)
     
+@cliente_route.route('/buscar')
+def buscar_cliente():
+    """ Buscar cliente por CPF ou telefone """
+    valor = request.args.get('valor')
+    tipo = request.args.get('tipo')
+
+    if not valor or not tipo:
+        return "Parâmetros 'valor' e 'tipo' são obrigatórios", 400
+
+
+    # Decide qual campo consultar
+    if tipo == 'cpf':
+        cliente = Cliente.get_or_none(Cliente.cpf == valor)
+    elif tipo == 'telefone':
+        cliente = Cliente.get_or_none(Cliente.telefone == valor)
+    else:
+        return "Tipo inválido. Use 'cpf' ou 'telefone'", 400
+
+    if not cliente:
+        return "Cliente não encontrado", 404
+
+    return render_template('detalhe_cliente.html', cliente=cliente)
 
 @cliente_route.route('/<int:cliente_id>/edit')
 def form_edit_cliente(cliente_id):

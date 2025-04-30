@@ -1,5 +1,53 @@
-<ul>
-    <li>ID: {{cliente.id}}</li>
-    <li>NOME: {{cliente.nome}}</li>
-    <li>E-MAIL: {{cliente.email}}</li>
-</ul>
+{% extends 'base.html' %}
+
+
+{% block conteudo %}
+
+
+    <div class="cover-container cliente  row gy-4">
+
+        <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Nome:</label>
+            <h3>{{cliente.nome}}</h3>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="message-text" class="col-form-label">CPF:</label>
+                <h3>{{cliente.cpf}}</h3>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="message-text" class="col-form-label">Celular 1:</label>
+                <h3>{{cliente.celular1}}</h3>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="message-text" class="col-form-label">Celular 2:</label>
+                <h3>{{cliente.celular2}}</h3>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="message-text" class="col-form-label">Data de Nascimento:</label>
+                <h3>{{cliente.data_de_nascimento}}</h3>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="message-text" class="col-form-label">Data de Atualização:</label>
+                <h3>{{cliente.data_atualizacao}}</h3>
+            </div>
+        </div>
+        <div class=" justify-content-end">
+
+            <div class="col-auto">
+                <button type="submit" class="btn btn-success">Nova Consulta</button>
+            </div>
+        </div>  
+
+    </div>
+
+
+{% endblock %}

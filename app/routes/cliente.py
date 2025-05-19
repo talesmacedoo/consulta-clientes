@@ -57,7 +57,11 @@ def buscar_cliente():
     if tipo == 'cpf':
         cliente = Cliente.get_or_none(Cliente.cpf == valor)
     elif tipo == 'telefone':
-        cliente = Cliente.get_or_none(Cliente.telefone == valor)
+        valor = valor.replace("(","")
+        valor = valor.replace(")","")
+        valor = valor.replace("-","")
+        valor = valor.replace(" ","")
+        cliente = Cliente.get_or_none(Cliente.celular1 == valor)
     else:
         return "Tipo inválido. Use 'cpf' ou 'telefone'", 400
 

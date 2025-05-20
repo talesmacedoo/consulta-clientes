@@ -23,17 +23,33 @@ body {
 }
 
 .cover-container {
-  max-width: 42em;
+  background-color: #fff; /* fundo claro da área de busca */
+  color: #333; /* texto escuro dentro da área */
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 400px;
 }
+
+
 
 .cliente{
   max-width: 60em;
-  border-radius: 2%;
+  border-radius: 12px;
   border-width: 2px;
   border-style: solid;
   border-color: #fff;
 }
 
+.cliente label{
+  font-size: 15px;
+}
+
+.cliente a{
+  text-decoration: none;
+  color: #333;
+}
 
 
 /*

@@ -51,6 +51,19 @@ body {
   color: #333;
 }
 
+.cliente a:hover{
+  text-decoration: none;
+  color: #ae883d;
+}
+
+.cliente i{
+  display: inline-block;
+  font-size: 20px; 
+  vertical-align: middle; 
+  color: #333;
+  
+}
+
 
 /*
  * Header

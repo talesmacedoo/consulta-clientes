@@ -6,7 +6,7 @@
     const btnTipoBusca = document.getElementById('btn-tipo-busca');
 
     let tipoAtual = 'cpf';
-
+ 
     const mascaras = {
       cpf: (v) => {
         return v
@@ -61,5 +61,38 @@
         input.value = ''; // limpa o campo ao trocar tipo
       });
     });
+
+  
+
+
+
+
   });
 
+  document.addEventListener('DOMContentLoaded', () => {
+    const cpfElement = document.getElementById("cpfText");
+    const alertCpf = document.getElementById("alertCpf");
+  
+    if (cpfElement && alertCpf) {
+      cpfElement.addEventListener("click", function (event) {
+        event.preventDefault(); 
+  
+        const textToCopy = cpfElement.textContent.trim();
+  
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          // Mostra o alerta Bootstrap
+          alertCpf.classList.remove('d-none');
+          alertCpf.classList.add('show');
+  
+          // Oculta após 2 segundos
+          setTimeout(() => {
+            alertCpf.classList.remove('show');
+            alertCpf.classList.add('d-none');
+          }, 2000);
+        }).catch(err => {
+          console.error("Erro ao copiar: ", err);
+        });
+      });
+    }
+  });
+  

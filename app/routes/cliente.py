@@ -55,6 +55,9 @@ def buscar_cliente():
 
     # Decide qual campo consultar
     if tipo == 'cpf':
+        valor = valor.replace("-","")
+        valor = valor.replace(".","")
+        valor = valor.replace(" ","")
         cliente = Cliente.get_or_none(Cliente.cpf == valor)
     elif tipo == 'telefone':
         valor = valor.replace("(","")

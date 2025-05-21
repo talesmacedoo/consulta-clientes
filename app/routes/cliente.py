@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, request
 from database.models.cliente import Cliente
 
+
 cliente_route = Blueprint('cliente', __name__)
 
 @cliente_route.route('/')
@@ -43,35 +44,37 @@ def detalhe_cliente(cliente_id):
     cliente = Cliente.get_by_id(cliente_id)
     return render_template('detalhe_cliente.html', cliente=cliente)
     
-@cliente_route.route('/buscar')
+@cliente_route.route('/buscar', methods=['GET','POST'])
 def buscar_cliente():
-    """ Buscar cliente por CPF ou telefone """
-    valor = request.args.get('valor')
-    tipo = request.args.get('tipo')
+    if request.method == 'POST':
+        """ Buscar cliente por CPF ou telefone """
+        valor = request.form.get('valor')
+        tipo = request.form.get('tipo')
 
-    if not valor or not tipo:
-        return "Parâmetros 'valor' e 'tipo' são obrigatórios", 400
+        if not valor or not tipo:
+            return "Parâmetros 'valor' e 'tipo' são obrigatórios", 400
 
 
-    # Decide qual campo consultar
-    if tipo == 'cpf':
-        valor = valor.replace("-","")
-        valor = valor.replace(".","")
-        valor = valor.replace(" ","")
-        cliente = Cliente.get_or_none(Cliente.cpf == valor)
-    elif tipo == 'telefone':
-        valor = valor.replace("(","")
-        valor = valor.replace(")","")
-        valor = valor.replace("-","")
-        valor = valor.replace(" ","")
-        cliente = Cliente.get_or_none(Cliente.celular1 == valor)
+        # Decide qual campo consultar
+        if tipo == 'cpf':
+            valor = valor.replace("-","").replace(".","").replace(" ","")
+            cliente = Cliente.get_or_none(Cliente.cpf == valor)
+
+        elif tipo == 'telefone':
+            valor = valor.replace("(","").replace(")","").replace("-","").replace(" ","")
+            cliente = Cliente.get_or_none(Cliente.celular1 == valor)
+            
+        else:
+            return "Tipo inválido. Use 'cpf' ou 'telefone'", 400
+
+        if not cliente:
+            return "Cliente não encontrado", 404
+
+        return render_template('detalhe_cliente.html', cliente=cliente)
+
     else:
-        return "Tipo inválido. Use 'cpf' ou 'telefone'", 400
+        return redirect(url_for('home.home'))
 
-    if not cliente:
-        return "Cliente não encontrado", 404
-
-    return render_template('detalhe_cliente.html', cliente=cliente)
 
 @cliente_route.route('/<int:cliente_id>/edit')
 def form_edit_cliente(cliente_id):

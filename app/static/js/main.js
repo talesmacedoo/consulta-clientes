@@ -70,6 +70,7 @@
   });
 
   document.addEventListener('DOMContentLoaded', () => {
+
     const cpfElement = document.getElementById("cpfText");
     const alertCpf = document.getElementById("alertCpf");
   

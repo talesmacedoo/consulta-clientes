@@ -2,24 +2,62 @@
 
 
 	{% block conteudo %}
+
+	
     <div class="cover-container">
-      <h1>Consultar Cliente</h1>
-      <form id="form-busca" method="POST" action="clientes/buscar">
-        <div class="input-group mb-3">
-          <button id="btn-tipo-busca" class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            CPF
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item tipo-busca" data-tipo="cpf" href="#">CPF</a></li>
-            <li><a class="dropdown-item tipo-busca" data-tipo="telefone" href="#">Telefone</a></li>
-          </ul>
-          <input type="text" name="valor" id="input-busca" class="form-control" placeholder="Digite o CPF" required>
-          <input type="hidden" name="tipo" id="tipo-escolhido" value="cpf">
-        </div>
-        <p class="lead">
-          <button type="submit" class="btn btn-outline-success">Consultar</button>
-        </p>
-      </form>
+		<h1>Consultar Cliente</h1>
+		<form id="form-busca" method="POST" action="clientes/buscar">
+			<div class="input-group mb-3">
+			<button id="btn-tipo-busca" class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+				CPF
+			</button>
+			<ul class="dropdown-menu">
+				<li><a class="dropdown-item tipo-busca" data-tipo="cpf" href="#">CPF</a></li>
+				<li><a class="dropdown-item tipo-busca" data-tipo="telefone" href="#">Telefone</a></li>
+			</ul>
+			<input type="text" name="valor" id="input-busca" class="form-control" placeholder="Digite o CPF" required>
+			<input type="hidden" name="tipo" id="tipo-escolhido" value="cpf">
+			</div>
+			<p class="lead">
+			<button type="submit" class="btn btn-outline-success">Consultar</button>
+			</p>
+
+		</form>
+
+		{% if request.args.get('erro') == '1' %}
+			<script>
+				window.onload = function () {
+					const modal = new bootstrap.Modal(document.getElementById('modalNaoEncontrado'));
+					modal.show();
+				};
+			</script>
+		{% endif %}
     </div>
+
+	<!-- Modal Cliente Não Encontrado -->
+	<div class="modal fade" id="modalNaoEncontrado" tabindex="-1" aria-labelledby="modalNaoEncontradoLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			
+			<div class="modal-header bg-danger text-white align-items-center">
+			<i class="bi bi-exclamation-triangle-fill me-2" ></i>
+			<h5 class="modal-title" id="modalNaoEncontradoLabel">Cliente não encontrado</h5>
+			<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+			</div>
+			
+			<div class="modal-body text-center">
+			<i class="bi bi-person-x-fill" ></i>
+			<p class="mt-3 fs-5">Nenhum cliente foi localizado com os dados fornecidos.</p>
+			</div>
+			
+			<div class="modal-footer justify-content-center">
+			<button type="button" class="btn btn-danger px-4" data-bs-dismiss="modal">Fechar</button>
+			</div>
+			
+		</div>
+		</div>
+	</div>
+
+
   
 	{% endblock %}

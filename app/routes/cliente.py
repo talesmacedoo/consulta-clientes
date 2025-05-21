@@ -63,13 +63,13 @@ def buscar_cliente():
         elif tipo == 'telefone':
             valor = valor.replace("(","").replace(")","").replace("-","").replace(" ","")
             cliente = Cliente.get_or_none(Cliente.celular1 == valor)
-            
+
         else:
             return "Tipo inválido. Use 'cpf' ou 'telefone'", 400
 
         if not cliente:
-            return "Cliente não encontrado", 404
-
+            return redirect(url_for('home.home') + '?erro=1')
+        
         return render_template('detalhe_cliente.html', cliente=cliente)
 
     else:

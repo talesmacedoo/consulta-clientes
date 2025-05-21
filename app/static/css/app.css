@@ -188,3 +188,7 @@ body {
     color: #333;
   }
 
+
+  .modal .modal-body i{
+    font-size: 2rem
+  }

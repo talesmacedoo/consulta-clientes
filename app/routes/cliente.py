@@ -1,14 +1,15 @@
 from flask import Blueprint, render_template, redirect, url_for, request
 from database.models.cliente import Cliente
 
+from datetime import datetime
 
 cliente_route = Blueprint('cliente', __name__)
 
-@cliente_route.route('/')
-def lista_cliente():
-    """ listar os clientes """
-    clientes = Cliente.select()
-    return render_template('lista_cliente.html', clientes=clientes)
+#@cliente_route.route('/')
+#def lista_cliente():
+#    """ listar os clientes """
+#    clientes = Cliente.select()
+#    return render_template('lista_cliente.html', clientes=clientes)
     
 @cliente_route.route('/adicionar-cliente')
 def adicionar_cliente():
@@ -55,7 +56,7 @@ def buscar_cliente():
             return "Parâmetros 'valor' e 'tipo' são obrigatórios", 400
 
 
-        # Decide qual campo consultar
+        
         if tipo == 'cpf':
             valor = valor.replace("-","").replace(".","").replace(" ","")
             cliente = Cliente.get_or_none(Cliente.cpf == valor)
@@ -69,6 +70,12 @@ def buscar_cliente():
 
         if not cliente:
             return redirect(url_for('home.home') + '?erro=1')
+
+        if cliente.data_nascimento:
+            cliente.data_nascimento = datetime.strptime(cliente.data_nascimento, '%Y-%m-%d')
+        if cliente.data_consulta: 
+            cliente.data_consulta= datetime.strptime(cliente.data_consulta, '%Y-%m-%d')
+
         
         return render_template('detalhe_cliente.html', cliente=cliente)
 

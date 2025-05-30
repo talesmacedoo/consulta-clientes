@@ -7,8 +7,12 @@ class Cliente(Model):
     cpf = CharField()
     celular1 = CharField()
     celular2 = CharField()
-    data_de_nascimento = CharField()
-    data_atualizacao = CharField()
+    celular3 = CharField()
+    celular4 = CharField()
+    email = CharField()
+    data_nascimento = CharField()
+    data_obito = CharField()
+    data_consulta = CharField()
 
     class Meta:
         database = db

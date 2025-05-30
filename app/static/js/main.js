@@ -70,29 +70,44 @@
   });
 
   document.addEventListener('DOMContentLoaded', () => {
-
     const cpfElement = document.getElementById("cpfText");
     const alertCpf = document.getElementById("alertCpf");
   
     if (cpfElement && alertCpf) {
       cpfElement.addEventListener("click", function (event) {
-        event.preventDefault(); 
+        event.preventDefault();
   
         const textToCopy = cpfElement.textContent.trim();
   
-        navigator.clipboard.writeText(textToCopy).then(() => {
-          // Mostra o alerta Bootstrap
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(textToCopy).then(() => {
+            mostrarAlerta();
+          }).catch(err => {
+            console.error("Erro ao copiar (clipboard API):", err);
+          });
+        } else {
+          // Fallback para HTTP ou contextos inseguros
+          const textArea = document.createElement("textarea");
+          textArea.value = textToCopy;
+          document.body.appendChild(textArea);
+          textArea.select();
+          try {
+            document.execCommand("copy");
+            mostrarAlerta();
+          } catch (err) {
+            console.error("Erro ao copiar (fallback):", err);
+          }
+          document.body.removeChild(textArea);
+        }
+  
+        function mostrarAlerta() {
           alertCpf.classList.remove('d-none');
           alertCpf.classList.add('show');
-  
-          // Oculta após 2 segundos
           setTimeout(() => {
             alertCpf.classList.remove('show');
             alertCpf.classList.add('d-none');
           }, 2000);
-        }).catch(err => {
-          console.error("Erro ao copiar: ", err);
-        });
+        }
       });
     }
   });

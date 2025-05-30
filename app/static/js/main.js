@@ -86,7 +86,6 @@
             console.error("Erro ao copiar (clipboard API):", err);
           });
         } else {
-          // Fallback para HTTP ou contextos inseguros
           const textArea = document.createElement("textarea");
           textArea.value = textToCopy;
           document.body.appendChild(textArea);
@@ -111,4 +110,49 @@
       });
     }
   });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    //Verificar se foi clicado no telefone e exibir alerta de cópia
+    const telElement = document.getElementById("telText");
+    const copyButton = document.getElementById("copiaTelefone");
+    const alertTelefone = document.getElementById("alertTelefone");
+  
+    if (telElement && copyButton && alertTelefone) {
+      copyButton.addEventListener("click", function (event) {
+        event.preventDefault();
+  
+        const textToCopy = telElement.textContent.trim();
+  
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(textToCopy).then(() => {
+            mostrarAlerta();
+          }).catch(err => {
+            console.error("Erro ao copiar (clipboard API):", err);
+          });
+        } else {
+          const textArea = document.createElement("textarea");
+          textArea.value = textToCopy;
+          document.body.appendChild(textArea);
+          textArea.select();
+          try {
+            document.execCommand("copy");
+            mostrarAlerta();
+          } catch (err) {
+            console.error("Erro ao copiar (fallback):", err);
+          }
+          document.body.removeChild(textArea);
+        }
+  
+        function mostrarAlerta() {
+          alertTelefone.classList.remove('d-none');
+          alertTelefone.classList.add('show');
+          setTimeout(() => {
+            alertTelefone.classList.remove('show');
+            alertTelefone.classList.add('d-none');
+          }, 2000);
+        }
+      });
+    }
+  });
+  
   

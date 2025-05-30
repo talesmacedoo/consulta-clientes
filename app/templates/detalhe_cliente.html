@@ -16,6 +16,12 @@
                 CPF copiado!
             </div> 
         </div>
+        <div id="alertTelefone" class="alert alert-success justify-content-center d-flex py-2 px-3 position-absolute top-0 start-0 mt-1 d-none" role="alert" style="z-index: 1000;">
+            <svg class="bi flex-shrink-0 me-2" width="20" height="20" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+            <div>
+                Telefone copiado!
+            </div> 
+        </div>
         <div class="form-group">
             <label for="recipient-name" class="col-form-label">Nome:</label>
             <h3>{{cliente.nome}}</h3>
@@ -30,7 +36,7 @@
         <div class="col-lg-4">
             <div class="form-group">
                 <label for="message-text" class="col-form-label">Celular 1:</label>
-                <h3><a href="https://wa.me/55{{cliente.celular1}}" target="_blank">{{cliente.celular1}}</a> <i class="bi bi-copy"></i></h3>
+                <h3><a id="telText" href="https://wa.me/55{{cliente.celular1}}" target="_blank">{{cliente.celular1}}</a> <a href="#" id="copiaTelefone"><i class="bi bi-copy"></i></a></h3>
             </div>
         </div>
         <div class="col-lg-4">

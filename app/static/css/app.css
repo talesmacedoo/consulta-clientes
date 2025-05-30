@@ -8,7 +8,7 @@
 .btn-light:hover,
 .btn-light:focus {
   color: #333;
-  text-shadow: none; /* Prevent inheritance from `body` */
+  text-shadow: none; 
 }
 
 
@@ -17,14 +17,15 @@
  */
 
 body {
+  font-family: 'Roboto', sans-serif;
   text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
   box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
   background-color: #fff;
 }
 
 .cover-container {
-  background-color: #fff; /* fundo claro da área de busca */
-  color: #333; /* texto escuro dentro da área */
+  background-color: #fff; 
+  color: #333; 
   padding: 30px;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);

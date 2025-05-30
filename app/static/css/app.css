@@ -23,6 +23,10 @@ body {
   background-color: #fff;
 }
 
+header{
+  margin: 5px 100px;
+}
+
 .cover-container {
   background-color: #fff; 
   color: #333; 

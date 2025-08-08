@@ -48,7 +48,13 @@
         <div class="col-lg-4">
             <div class="form-group">
                 <label for="message-text" class="col-form-label">Data de Nascimento:</label>
-                <h3>{{cliente.data_nascimento.strftime('%d/%m/%Y')}}</h3>
+                <h3>
+                    {% if cliente.data_nascimento %}
+                        {{ cliente.data_nascimento.strftime('%d/%m/%Y') }}
+                    {% else %}
+                        <span class="text-muted">Data não informada</span>
+                    {% endif %}
+                </h3>
             </div>
         </div>
         <div class="col-lg-4">
